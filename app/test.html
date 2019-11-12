@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+
+  <script>
+
+    //1、编写一个计算一个数 m 的 n 次幂通用函数
+    function pow(m, n) {
+      //m: 底数
+      //n: 幂
+
+      if (m == 0 && n > 0) {
+        return 0;
+      }
+
+      if (m == 0 && n < 0) {
+        return Infinity;
+      }
+
+      if (n == 0) {
+        return 1;
+      }
+
+      var sum = 1;
+
+      //绝对值
+      var k = n > 0 ? n : -n;
+
+      for (var i = 0; i < k; i++) {
+        sum = sum * m;
+      }
+
+      return n < 0 ? 1 / sum : sum;
+
+    }
+
+    //调用例子, 3 的 6 次幂
+    // var result = pow(2, 9);
+    // console.log('result ==> ', result);
+
+
+    //2、编写一个在指定范围 m 查找所有 质数 的通用函数, 返回一个由所有 质数 组成的数组
+
+    function findPrime(m) {
+
+      //m: 指定范围
+
+      //质数(素数)：一个大于1且只能被1或者本身整除的数
+
+      var prime = [];
+
+      for (var i = 2; i <= m; i++) {
+        //这个i就是所需要的质数
+
+        for (var j = 2; j <= i; j++) {
+
+          //j就是i的因数
+          if (i != j && i % j == 0) {
+            break;
+          }
+
+          if (i == j) {
+            //此处的i就是需要查找的质数
+            console.log('i ==> ', i);
+            prime.push(i);
+          }
+
+        }
+
+      }
+
+
+
+      return prime;
+    }
+
+    //调用例子, 在 300 内查找所有质数
+    // var result = findPrime(20);
+    // console.log('result ==>', result);
+
+
+    var o1 = {
+      a: 1,
+      b: 10,
+      c: 12,
+      d: 'hello',
+      e: undefined
+    };
+
+    var arr = ['b', 'a'];
+    var ab = [];
+    function fn(o, arr) {
+
+      var x = {};
+
+      for (var i in o) {
+        ab.push(i)
+      }
+      console.log(ab);
+
+      for (var i = 0; i < ab.length; i++) {
+        var flag = true
+        for (var z = 0; z < arr.length; z++) {
+          if (ab[i] == arr[z]) {
+            flag = false;
+          }
+        }
+
+        if (flag) {
+          x[ab[i]] = o[ab[i]]
+        }
+      }
+
+      console.log(x)
+    }
+    // fn(o1,arr);
+
+    function fn2(o, arr) {
+      for (k in o) {
+        for (var i = 0; i < arr.length; i++) {
+          if (k === arr[i]) {
+            delete o[k]
+          }
+
+        }
+      }
+      return o
+    }
+
+    // var a = fn2(o1,arr)
+    // console.log(a)
+
+    function filterObject(o, arr) {
+
+      for (var i = 0; i < arr.length; i++) {
+
+        //判断某个属性是否在对象中
+        if (arr[i] in o) {
+          delete o[arr[i]];
+        }
+
+      }
+
+      return o;
+
+    }
+
+    // var r1 = filterObject(o1, arr);
+    // console.log('r1 ==> ', r1);
+
+
+
+
+    //编写一个 查找数组元素 通用方法, 找到返回元素的下标, 找不到返回 -1
+    //和内置函数 [].indexOf('查找元素')
+    function findElementByIndex(arr, ele, index) {
+      //arr: 原数组
+      //ele: 查找数组的元素
+      //index: 开始查找下标
+      for(var i = index || 0;i < arr.length;i++){
+        if(arr[i] === ele){
+          return i;
+        }
+      }
+      return -1;
+
+
+
+      //return;
+
+    }
+
+
+    //调用例子
+    var result = findElementByIndex(['a', 'hello', true, 2], 'hello', 2);
+    console.log('result ==> ', result);
+
+  </script>
+</body>
+
+</html>
